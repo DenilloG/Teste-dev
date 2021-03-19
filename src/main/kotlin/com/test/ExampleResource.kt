@@ -1,7 +1,9 @@
 package com.test
 
 import com.models.City
+import com.models.State
 import com.service.CityService
+import com.service.StateService
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonArray
 import org.jboss.logging.annotations.Field
@@ -16,19 +18,36 @@ class ExampleResource {
 
     @Inject
     @field: Default
-    lateinit var service: CityService
+    lateinit var cityService: CityService
+    @Inject
+    @field: Default
+    lateinit var stateService: StateService
 
     @GET()
     @Produces(MediaType.TEXT_PLAIN)
     @Path("cities")
     fun getAllCities(): List<City> {
-        return service.getAll();
+        return cityService.getAll();
+    }
+
+    @GET()
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("states")
+    fun getAllStates(): List<State> {
+        return stateService.getAll();
     }
 
     @POST()
     @Path("addCity")
     @Consumes(MediaType.APPLICATION_JSON)
     fun addCity(city : City) {
-        return service.addCity(city);
+        return cityService.addCity(city);
+    }
+
+    @POST()
+    @Path("addState")
+    @Consumes(MediaType.APPLICATION_JSON)
+    fun addCity(state : State) {
+        return stateService.addState(state);
     }
 }

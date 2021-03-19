@@ -18,4 +18,12 @@ class CityService {
     fun removeCity(id: Int) {
         cities.removeIf { x -> x.id == id };
     }
+
+    fun getCityByName(name: String): City? {
+       return cities.find { city -> city.name == name }
+    }
+
+    fun getCityByCode(id: Int): City? {
+        return cities.find { city -> city.id == id }
+    }
 }
